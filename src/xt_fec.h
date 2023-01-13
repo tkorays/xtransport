@@ -37,6 +37,7 @@ typedef struct {
     int a;
 } xt_fec_decoder_t;
 
+CF_DECLS_BEGIN
 
 cf_bool_t xt_fec_encoder_init(xt_fec_encoder_t* self);
 void xt_fec_encoder_deinit(xt_fec_encoder_t* self);
@@ -69,5 +70,6 @@ int xt_fec_decoder_output(
     cf_size_t buffer_size
 );
 
+CF_DECLS_END
 
 #endif /* __XT_FEC_H__ */
