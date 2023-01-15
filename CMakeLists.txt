@@ -9,15 +9,16 @@ file(
     ${CMAKE_SOURCE_DIR}/src/*.c
 )
 
-include_directories(third_party/CFAST/include/ src/)
+# include_directories(third_party/CFAST/include/ src/)
+include_directories(${CMAKE_SOURCE_DIR}/include/ ${CMAKE_SOURCE_DIR}/src/)
 add_library(xtransport ${XTRANSPORT_SRC})
 
-add_subdirectory(third_party/CFAST)
-if (UNIX)
-    target_link_libraries(xtransport pthread cfast)
-else()
-    target_link_libraries(xtransport cfast)
-endif()
+# add_subdirectory(third_party/CFAST)
+# if (UNIX)
+#     target_link_libraries(xtransport pthread cfast)
+# else()
+#     target_link_libraries(xtransport cfast)
+# endif()
 
 
 add_executable(

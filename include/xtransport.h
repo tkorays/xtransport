@@ -11,9 +11,8 @@
 #ifndef __XTRANSPORT_H__
 #define __XTRANSPORT_H__
 
-#include "cf/types.h"
+#include "xtransport_types.h"
 
-CF_DECLS_BEGIN
 
 #define XT_MAX_CONNECTIONS          4
 #define XT_MAX_STREAMS              (256)
@@ -21,8 +20,8 @@ CF_DECLS_BEGIN
 #define XT_IS_VALID_STREAM_ID(id)   ((id)>= 0 && (id) < XT_MAX_STREAMS)
 #define XT_IS_VALID_CONN_ID(id)     ((id) >= 0 and (id) < XT_MAX_CONNECTIONS)
 
-typedef cf_int_t xt_conn_id_t;
-typedef cf_int_t xt_stream_id_t;
+typedef int32_t xt_conn_id_t;
+typedef int32_t xt_stream_id_t;
 
 /**
  * @brief `xt_context_t` is a global transport context.
@@ -99,8 +98,12 @@ typedef struct xt_socket {
 
 struct xt_nack_handler {
     void (*XT_NACK_HANDLER_ON_PACKET_FN)(xt_nack_handler_t* self, xt_packet_info_t info);
-    cf_bool_t (*XT_NACK_HANDLER_GET_NACKS_FN)(xt_nack_handler_t* self, void*, cf_size_t);
+    int (*XT_NACK_HANDLER_GET_NACKS_FN)(xt_nack_handler_t* self, void*, size_t);
 };
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 xt_context_t* xt_ctx_new();
 void xt_ctx_delete(xt_context_t*);
@@ -115,16 +118,18 @@ xt_connection_t* xt_conn_new(xt_context_t*, xt_socket_t*);
 void xt_conn_delete(xt_connection_t*);
 
 xt_stream_t* xt_stream_new(xt_context_t*, xt_stream_dir_t, int);
-cf_bool_t xt_stream_add_conn(xt_stream_t*, xt_connection_t*);
-cf_bool_t xt_stream_remove_conn(xt_stream_t*, xt_connection_t*);
-cf_bool_t xt_stream_send(xt_stream_t*, void*, int);
+int xt_stream_add_conn(xt_stream_t*, xt_connection_t*);
+int xt_stream_remove_conn(xt_stream_t*, xt_connection_t*);
+int xt_stream_send(xt_stream_t*, void*, int);
 
 
-cf_bool_t xt_stream_set_encryptor(xt_stream_t*, xt_encryptor_t*);
-cf_bool_t xt_stream_set_decryptor(xt_stream_t*, xt_decryptor_t*);
-cf_bool_t xt_stream_set_packetizer(xt_stream_t*, xt_packetizer_t*);
-cf_bool_t xt_stream_set_depacktizer(xt_stream_t*, xt_depacketizer_t*);
+int xt_stream_set_encryptor(xt_stream_t*, xt_encryptor_t*);
+int xt_stream_set_decryptor(xt_stream_t*, xt_decryptor_t*);
+int xt_stream_set_packetizer(xt_stream_t*, xt_packetizer_t*);
+int xt_stream_set_depacktizer(xt_stream_t*, xt_depacketizer_t*);
 
-CF_DECLS_END
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* __XTRANSPORT_H__ */

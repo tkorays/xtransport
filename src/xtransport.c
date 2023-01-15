@@ -1,12 +1,8 @@
 #include "xtransport.h"
 #include "xt_private_defs.h"
-#include "cf/socket.h"
-#include "cf/memory.h"
-#include "cf/bytes.h"
-#include "cf/clock.h"
 #include <stdio.h>
 
-
+#if 0
 cf_bool_t xt_ctx_demux_packet(xt_context_t* ctx, const void* buff, int size) {
     xt_packet_t* packet = CF_TYPE_CAST(xt_packet_t*, buff);
 
@@ -223,3 +219,4 @@ cf_bool_t xt_stream_send(xt_stream_t* self, void* buff, int size) {
 cf_bool_t _xt_stream_on_recv(xt_stream_t* self, const void* buff, int size) {
     return CF_TRUE;
 }
+#endif

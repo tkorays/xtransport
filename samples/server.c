@@ -1,8 +1,7 @@
 #include "xtransport.h"
-#include "cf/socket.h"
-#include "cf/time.h"
 #include <stdio.h>
 
+#if 0
 int socket_send(struct xt_socket* self, void* buff, int size) {
     return cf_socket_sendto(CF_TYPE_CAST(cf_socket_t*, self->ctx), CF_TYPE_CAST(cf_sockaddr_t*, self->peer_addr), buff, size);
 }
@@ -54,5 +53,11 @@ int main(int argc, char** argv) {
     }
 
     cf_socket_shutdown();
+    return 0;
+}
+#endif
+
+int main(int argc, char *argv[])
+{
     return 0;
 }

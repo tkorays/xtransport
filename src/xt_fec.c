@@ -889,7 +889,7 @@ void fec_decode(int blockSize,
 			nr_fec_blocks);
 }
 
-
+#if 0
 cf_bool_t xt_fec_encoder_init(xt_fec_encoder_t* self) {
     fec_init();
     return CF_TRUE;
@@ -947,3 +947,4 @@ int xt_fec_decoder_output(
 ) {
     return 0;
 }
+#endif
